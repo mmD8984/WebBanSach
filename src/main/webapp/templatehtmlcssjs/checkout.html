@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thanh toán - BookStore">
+    <title>Thanh Toán - BookStore</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-info">
+                    <span class="header-phone">📞 1800-1234</span>
+                    <span class="header-email">📧 support@bookstore.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container nav-container">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-icon">📚</span>
+                        <span class="logo-text">BookStore</span>
+                    </a>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="header-search" placeholder="Tìm kiếm sách, tác giả..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Trang chủ</a></li>
+                        <li><a href="products.html">Sản phẩm</a></li>
+                        <li><a href="about.html">Giới thiệu</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="icon-btn" id="menu-toggle">☰</button>
+                    <a href="cart.html" class="cart-link">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-badge" id="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <h1 class="page-title">Thanh Toán</h1>
+
+            <!-- Checkout Steps -->
+            <div class="checkout-steps">
+                <div class="step active">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Thông Tin</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Vận Chuyển</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Thanh Toán</span>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <span class="step-label">Xác Nhận</span>
+                </div>
+            </div>
+
+            <div class="checkout-wrapper">
+                <!-- Checkout Form -->
+                <div class="checkout-form">
+                    <!-- Step 1: Customer Info -->
+                    <section class="checkout-section" id="step-1">
+                        <h2>Thông Tin Khách Hàng</h2>
+                        <form id="customer-form" class="form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullname">Họ và Tên *</label>
+                                    <input type="text" id="fullname" name="fullname" required class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Số Điện Thoại *</label>
+                                    <input type="tel" id="phone" name="phone" required class="form-input">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required class="form-input">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Địa Chỉ *</label>
+                                <input type="text" id="address" name="address" required class="form-input">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">Thành Phố *</label>
+                                    <input type="text" id="city" name="city" required class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label for="district">Quận/Huyện *</label>
+                                    <input type="text" id="district" name="district" required class="form-input">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notes">Ghi Chú (Không bắt buộc)</label>
+                                <textarea id="notes" name="notes" rows="4" class="form-input"></textarea>
+                            </div>
+
+                            <button type="button" class="btn btn-primary" id="next-step-1">Tiếp Tục</button>
+                        </form>
+                    </section>
+
+                    <!-- Step 2: Shipping -->
+                    <section class="checkout-section" id="step-2" style="display:none;">
+                        <h2>Phương Thức Vận Chuyển</h2>
+                        <form id="shipping-form" class="form">
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="shipping" value="standard" checked>
+                                    <span class="radio-label">
+                                        <strong>Vận Chuyển Tiêu Chuẩn</strong> - 3-5 ngày (Miễn phí)
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="shipping" value="express">
+                                    <span class="radio-label">
+                                        <strong>Vận Chuyển Nhanh</strong> - 1-2 ngày (50.000đ)
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="shipping" value="overnight">
+                                    <span class="radio-label">
+                                        <strong>Vận Chuyển Qua Đêm</strong> - Hôm sau (100.000đ)
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="form-buttons">
+                                <button type="button" class="btn btn-outline" id="back-step-2">Quay Lại</button>
+                                <button type="button" class="btn btn-primary" id="next-step-2">Tiếp Tục</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- Step 3: Payment -->
+                    <section class="checkout-section" id="step-3" style="display:none;">
+                        <h2>Phương Thức Thanh Toán</h2>
+                        <form id="payment-form" class="form">
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="payment" value="cod" checked>
+                                    <span class="radio-label">
+                                        <strong>Thanh Toán Khi Nhận Hàng</strong> (COD)
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="payment" value="transfer">
+                                    <span class="radio-label">
+                                        <strong>Chuyển Khoản Ngân Hàng</strong>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="payment" value="card">
+                                    <span class="radio-label">
+                                        <strong>Thẻ Tín Dụng / Debit</strong>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div id="card-details" style="display:none;">
+                                <div class="form-group">
+                                    <label for="card-number">Số Thẻ</label>
+                                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" class="form-input">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="card-expiry">Ngày Hết Hạn</label>
+                                        <input type="text" id="card-expiry" placeholder="MM/YY" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="card-cvv">CVV</label>
+                                        <input type="text" id="card-cvv" placeholder="123" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-buttons">
+                                <button type="button" class="btn btn-outline" id="back-step-3">Quay Lại</button>
+                                <button type="button" class="btn btn-primary" id="next-step-3">Tiếp Tục</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- Step 4: Confirmation -->
+                    <section class="checkout-section" id="step-4" style="display:none;">
+                        <h2>Xác Nhận Đơn Hàng</h2>
+                        <div class="order-summary" id="order-summary">
+                            <!-- Populate by JS -->
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-outline" id="back-step-4">Quay Lại</button>
+                            <button type="button" class="btn btn-primary btn-lg" id="place-order">Đặt Hàng</button>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Order Summary Sidebar -->
+                <aside class="checkout-summary">
+                    <div class="summary-card">
+                        <h3>Tóm Tắt Đơn Hàng</h3>
+                        <div id="checkout-items" class="order-items">
+                            <!-- Populate by JS -->
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Tổng tiền:</span>
+                            <span id="checkout-total">0đ</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Về BookStore</h4>
+                    <ul>
+                        <li><a href="about.html">Giới thiệu</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Hỗ Trợ Khách Hàng</h4>
+                    <ul>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Theo Dõi Chúng Tôi</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Nhận Tin Khuyến Mãi</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email của bạn" required>
+                        <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 BookStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,7 @@
+
+vo chon ngan hang ncb roi nhap thong tin sau:
+Ngân hàng: NCB
+Số thẻ: 9704198526191432198
+Tên: NGUYEN VAN A
+Ngày: 07/15
+OTP: 123456

@@ -1,1 +1,29 @@
+# Build directories
 /build/
+/target/
+*.class
+
+# IDE
+.idea/
+.project
+.classpath
+.settings/
+*.iml
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maven
+dependency-reduced-pom.xml
+
+# Tomcat
+catalina.out
+logs/
+
+# Misc
+*.log
+.env
