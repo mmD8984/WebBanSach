@@ -1,13 +1,13 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.OrderDAO;
 import com.bookstore.model.Order;
 import com.bookstore.model.OrderItem;
 import com.bookstore.model.User;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * Displays user's order history
  */
 @WebServlet("/orders")
-public class OrderHistoryServlet extends HttpServlet {
+public class OrderHistoryController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

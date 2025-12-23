@@ -1,10 +1,10 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.OrderDAO;
 import com.bookstore.model.Order;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * Handles 4-step checkout: customer info -> shipping -> payment -> confirmation
  */
 @WebServlet("/checkout")
-public class CheckoutServlet extends HttpServlet {
+public class CheckoutController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

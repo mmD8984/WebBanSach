@@ -1,4 +1,4 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.OrderDAO;
 import com.bookstore.model.Order;
@@ -8,9 +8,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.List;
  * Handles test payment - immediately marks as paid for testing purposes
  */
 @WebServlet("/api/test-payment")
-public class TestPaymentServlet extends HttpServlet {
+public class TestPaymentController extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

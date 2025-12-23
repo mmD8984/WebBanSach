@@ -1,20 +1,20 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.BookDAO;
 import com.bookstore.model.Book;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 
 /**
  * Servlet for Product Detail Page
  * Displays detailed information about a single product
  */
 @WebServlet("/product")
-public class ProductDetailServlet extends HttpServlet {
+public class ProductDetailController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

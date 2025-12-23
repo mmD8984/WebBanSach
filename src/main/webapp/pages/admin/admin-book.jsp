@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -13,6 +13,12 @@
 <div class="container py-4">
 
     <h2 class="mb-4">Quản lý sách</h2>
+    
+    <div class="mb-3">
+        <a href="${pageContext.request.contextPath}/" class="btn btn-outline-secondary">← Về trang chủ</a>
+        <a href="${pageContext.request.contextPath}/admin-category" class="btn btn-outline-primary ms-2">Quản lý thể loại</a>
+        <a href="${pageContext.request.contextPath}/admin-user" class="btn btn-outline-primary ms-2">Quản lý người dùng</a>
+    </div>
 
     <c:if test="${not empty message}">
         <div class="alert alert-success">${message}</div>
@@ -32,9 +38,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Tiêu đề</th>
-                        <th>Thể loại</th>
                         <th>Tác giả</th>
-                        <th>Nhà xuất bản</th>
+                        <th>Thể loại</th>
                         <th>Giá</th>
                         <th>Tồn kho</th>
                         <th>Trạng thái</th>
@@ -46,15 +51,18 @@
                         <tr>
                             <td>${b.id}</td>
                             <td>${b.title}</td>
+                            <td>${b.authorName}</td>
                             <td>${b.categoryName}</td>
-                            <td>${b.authorNames}</td>
-                            <td>${b.publisherName}</td>
-                            <td>${b.price}</td>
-                            <td>${b.stockQuantity}</td>
+                            <td><fmt:formatNumber value="${b.price}" type="number"/> đ</td>
+                            <td>${b.stock}</td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${b.active}">Hiển thị</c:when>
-                                    <c:otherwise>Ẩn</c:otherwise>
+                                    <c:when test="${b.status == 'available'}">
+                                        <span class="badge bg-success">Còn hàng</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge bg-secondary">Hết hàng</span>
+                                    </c:otherwise>
                                 </c:choose>
                             </td>
                             <td>
@@ -98,7 +106,7 @@
         </div>
     </div>
 
-    <!-- FORM THÊM / SỬA (có thể mở rộng giống admin-category) -->
+    <!-- FORM THÊM / SỬA -->
     <div class="card">
         <div class="card-header bg-primary text-white">
             <c:choose>
@@ -116,10 +124,28 @@
                     <input type="hidden" name="id" value="${book.id}">
                 </c:if>
 
-                <div class="mb-3">
-                    <label class="form-label">Tiêu đề</label>
-                    <input type="text" class="form-control" name="title"
-                           value="${book.title}" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Tiêu đề *</label>
+                            <input type="text" class="form-control" name="title"
+                                   value="${book.title}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Tác giả</label>
+                            <select class="form-select" name="authorId">
+                                <option value="">-- Chọn tác giả --</option>
+                                <c:forEach var="a" items="${authorList}">
+                                    <option value="${a.id}" 
+                                        <c:if test="${book.authorId == a.id}">selected</c:if>>
+                                        ${a.name}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -127,45 +153,81 @@
                     <textarea class="form-control" name="description" rows="3">${book.description}</textarea>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Giá</label>
-                    <input type="number" step="0.01" min="0" class="form-control" name="price"
-                           value="${book.price}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Tồn kho</label>
-                    <input type="number" min="0" class="form-control" name="stockQuantity"
-                           value="${book.stockQuantity}" required>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label">Giá *</label>
+                            <input type="number" min="0" class="form-control" name="price"
+                                   value="${book.price}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label">Giá gốc</label>
+                            <input type="number" min="0" class="form-control" name="originalPrice"
+                                   value="${book.originalPrice}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label">Tồn kho *</label>
+                            <input type="number" min="0" class="form-control" name="stock"
+                                   value="${book.stock}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label">Thể loại</label>
+                            <select class="form-select" name="categoryId">
+                                <option value="">-- Chọn thể loại --</option>
+                                <c:forEach var="c" items="${categoryList}">
+                                    <option value="${c.id}" 
+                                        <c:if test="${book.categoryId == c.id}">selected</c:if>>
+                                        ${c.name}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Ảnh bìa (URL)</label>
-                    <input type="text" class="form-control" name="coverImage"
-                           value="${book.coverImage}">
+                    <input type="text" class="form-control" name="image"
+                           value="${book.image}">
                 </div>
 
-                <!-- Tạm thời: nhập ID category/publisher bằng tay.
-                     Sau này có thể thay bằng select từ Category/Publisher list -->
-                <div class="mb-3">
-                    <label class="form-label">ID thể loại</label>
-                    <input type="number" min="0" class="form-control" name="categoryId"
-                           value="${book.categoryId}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">ID nhà xuất bản</label>
-                    <input type="number" min="0" class="form-control" name="publisherId"
-                           value="${book.publisherId}">
-                </div>
-
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="active"
-                           id="activeCheck"
-                           <c:if test="${book == null || book.active}">checked</c:if>>
-                    <label class="form-check-label" for="activeCheck">
-                        Hiển thị
-                    </label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="featured"
+                                   id="featuredCheck"
+                                   <c:if test="${book.featured}">checked</c:if>>
+                            <label class="form-check-label" for="featuredCheck">
+                                Nổi bật
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="bestseller"
+                                   id="bestsellerCheck"
+                                   <c:if test="${book.bestseller}">checked</c:if>>
+                            <label class="form-check-label" for="bestsellerCheck">
+                                Bán chạy
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="isNew"
+                                   id="newCheck"
+                                   <c:if test="${book.new}">checked</c:if>>
+                            <label class="form-check-label" for="newCheck">
+                                Sách mới
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-success">
@@ -188,3 +250,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

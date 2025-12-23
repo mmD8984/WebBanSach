@@ -1,8 +1,8 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 /**
@@ -10,7 +10,7 @@ import java.io.IOException;
  * Handles user logout and session invalidation
  */
 @WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
+public class LogoutController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

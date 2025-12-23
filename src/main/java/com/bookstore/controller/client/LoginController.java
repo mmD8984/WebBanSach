@@ -1,12 +1,12 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.UserDAO;
 import com.bookstore.model.User;
 import com.bookstore.util.PasswordUtil;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 /**
@@ -14,7 +14,7 @@ import java.io.IOException;
  * Handles user login and session creation
  */
 @WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+public class LoginController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

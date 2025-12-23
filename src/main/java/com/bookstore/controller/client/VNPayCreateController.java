@@ -1,4 +1,4 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.OrderDAO;
 import com.bookstore.model.Order;
@@ -7,9 +7,9 @@ import com.bookstore.model.User;
 import com.bookstore.util.VNPayConfig;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -20,7 +20,7 @@ import java.lang.reflect.Type;
  * Receives order information and creates payment URL to redirect to VNPAY gateway
  */
 @WebServlet("/vnpay/create")
-public class VNPayCreateServlet extends HttpServlet {
+public class VNPayCreateController extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

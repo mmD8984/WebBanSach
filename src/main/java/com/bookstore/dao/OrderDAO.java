@@ -179,7 +179,7 @@ public class OrderDAO {
      * Update order status
      */
     public static boolean updateOrderStatus(int orderId, String status) throws SQLException {
-        String sql = "UPDATE orders SET status = ? WHERE id = ?";
+        String sql = "UPDATE orders SET order_status = ? WHERE id = ?";
         Connection conn = null;
         PreparedStatement ps = null;
         

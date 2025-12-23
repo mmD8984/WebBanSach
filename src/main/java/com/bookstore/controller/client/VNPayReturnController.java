@@ -1,11 +1,11 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.OrderDAO;
 import com.bookstore.model.Order;
 import com.bookstore.util.VNPayConfig;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
@@ -16,7 +16,7 @@ import java.util.*;
  * Updates order status and redirects to success page
  */
 @WebServlet("/vnpay/return")
-public class VNPayReturnServlet extends HttpServlet {
+public class VNPayReturnController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

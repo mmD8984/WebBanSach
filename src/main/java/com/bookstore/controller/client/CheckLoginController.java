@@ -1,9 +1,9 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.model.User;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 /**
@@ -12,7 +12,7 @@ import java.io.IOException;
  * Used by JavaScript to verify session before adding to cart
  */
 @WebServlet("/api/check-login")
-public class CheckLoginServlet extends HttpServlet {
+public class CheckLoginController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

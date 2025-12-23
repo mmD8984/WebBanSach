@@ -98,5 +98,66 @@ public class CategoryDAO {
         }
         DBConnection.closeConnection(conn);
     }
+    
+    /**
+     * Insert a new category
+     */
+    public static boolean insertCategory(Category category) throws SQLException {
+        String sql = "INSERT INTO categories (name, icon, description, count) VALUES (?, ?, ?, ?)";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, category.getName());
+            ps.setString(2, category.getIcon());
+            ps.setString(3, category.getDescription());
+            ps.setInt(4, category.getCount());
+            return ps.executeUpdate() > 0;
+        } finally {
+            closeResources(ps, conn);
+        }
+    }
+    
+    /**
+     * Update an existing category
+     */
+    public static boolean updateCategory(Category category) throws SQLException {
+        String sql = "UPDATE categories SET name = ?, icon = ?, description = ?, count = ? WHERE id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, category.getName());
+            ps.setString(2, category.getIcon());
+            ps.setString(3, category.getDescription());
+            ps.setInt(4, category.getCount());
+            ps.setInt(5, category.getId());
+            return ps.executeUpdate() > 0;
+        } finally {
+            closeResources(ps, conn);
+        }
+    }
+    
+    /**
+     * Delete a category by ID
+     */
+    public static boolean deleteCategory(int id) throws SQLException {
+        String sql = "DELETE FROM categories WHERE id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } finally {
+            closeResources(ps, conn);
+        }
+    }
 }
 

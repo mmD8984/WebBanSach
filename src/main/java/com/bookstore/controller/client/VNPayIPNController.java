@@ -1,13 +1,13 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.OrderDAO;
 import com.bookstore.model.Order;
 import com.bookstore.util.VNPayConfig;
 import com.google.gson.JsonObject;
 import com.google.gson.Gson;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
@@ -18,7 +18,7 @@ import java.util.*;
  * This is called by VNPAY server, NOT by user browser
  */
 @WebServlet("/vnpay/ipn")
-public class VNPayIPNServlet extends HttpServlet {
+public class VNPayIPNController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

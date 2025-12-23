@@ -350,5 +350,109 @@ public class BookDAO {
         }
         DBConnection.closeConnection(conn);
     }
+    
+    /**
+     * Insert a new book
+     */
+    public static boolean insertBook(Book book) throws SQLException {
+        String sql = "INSERT INTO books (title, author_id, publisher_id, category_id, price, " +
+                     "original_price, discount, pages, year, rating, reviews, description, " +
+                     "image, status, format, size, stock, featured, bestseller, is_new) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, book.getTitle());
+            ps.setInt(2, book.getAuthorId());
+            ps.setInt(3, book.getPublisherId());
+            ps.setInt(4, book.getCategoryId());
+            ps.setLong(5, book.getPrice());
+            ps.setLong(6, book.getOriginalPrice());
+            ps.setInt(7, book.getDiscount());
+            ps.setInt(8, book.getPages());
+            ps.setInt(9, book.getYear());
+            ps.setDouble(10, book.getRating());
+            ps.setInt(11, book.getReviews());
+            ps.setString(12, book.getDescription());
+            ps.setString(13, book.getImage());
+            ps.setString(14, book.getStatus() != null ? book.getStatus() : "available");
+            ps.setString(15, book.getFormat());
+            ps.setString(16, book.getSize());
+            ps.setInt(17, book.getStock());
+            ps.setBoolean(18, book.isFeatured());
+            ps.setBoolean(19, book.isBestseller());
+            ps.setBoolean(20, book.isNew());
+            
+            return ps.executeUpdate() > 0;
+        } finally {
+            closeResources(ps, conn);
+        }
+    }
+    
+    /**
+     * Update an existing book
+     */
+    public static boolean updateBook(Book book) throws SQLException {
+        String sql = "UPDATE books SET title = ?, author_id = ?, publisher_id = ?, " +
+                     "category_id = ?, price = ?, original_price = ?, discount = ?, " +
+                     "pages = ?, year = ?, rating = ?, reviews = ?, description = ?, " +
+                     "image = ?, status = ?, format = ?, size = ?, stock = ?, " +
+                     "featured = ?, bestseller = ?, is_new = ? WHERE id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, book.getTitle());
+            ps.setInt(2, book.getAuthorId());
+            ps.setInt(3, book.getPublisherId());
+            ps.setInt(4, book.getCategoryId());
+            ps.setLong(5, book.getPrice());
+            ps.setLong(6, book.getOriginalPrice());
+            ps.setInt(7, book.getDiscount());
+            ps.setInt(8, book.getPages());
+            ps.setInt(9, book.getYear());
+            ps.setDouble(10, book.getRating());
+            ps.setInt(11, book.getReviews());
+            ps.setString(12, book.getDescription());
+            ps.setString(13, book.getImage());
+            ps.setString(14, book.getStatus() != null ? book.getStatus() : "available");
+            ps.setString(15, book.getFormat());
+            ps.setString(16, book.getSize());
+            ps.setInt(17, book.getStock());
+            ps.setBoolean(18, book.isFeatured());
+            ps.setBoolean(19, book.isBestseller());
+            ps.setBoolean(20, book.isNew());
+            ps.setInt(21, book.getId());
+            
+            return ps.executeUpdate() > 0;
+        } finally {
+            closeResources(ps, conn);
+        }
+    }
+    
+    /**
+     * Delete a book by ID
+     */
+    public static boolean deleteBook(int id) throws SQLException {
+        String sql = "DELETE FROM books WHERE id = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } finally {
+            closeResources(ps, conn);
+        }
+    }
 }
 

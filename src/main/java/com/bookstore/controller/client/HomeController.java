@@ -1,4 +1,4 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
 import com.bookstore.dao.BookDAO;
 import com.bookstore.dao.CategoryDAO;
@@ -7,16 +7,16 @@ import com.bookstore.model.Category;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 
 /**
  * Home Page Servlet
  * Displays featured products, categories, and bestsellers
  */
 @WebServlet("/")
-public class HomeServlet extends HttpServlet {
+public class HomeController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

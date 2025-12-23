@@ -1,8 +1,8 @@
-package com.bookstore.servlet;
+package com.bookstore.controller.client;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 /**
@@ -10,7 +10,7 @@ import java.io.IOException;
  * Displays the shopping cart (client-side managed with localStorage/sessionStorage)
  */
 @WebServlet("/cart")
-public class CartServlet extends HttpServlet {
+public class CartController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
