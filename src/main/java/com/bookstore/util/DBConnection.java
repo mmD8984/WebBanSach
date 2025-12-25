@@ -1,4 +1,4 @@
-package com.bookstore.listener;
+package com.bookstore.util;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 @WebListener
-public class DBContextListener implements ServletContextListener {
+public class DBConnection implements ServletContextListener {
 
     private Connection connection;
 
