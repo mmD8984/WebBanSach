@@ -140,6 +140,34 @@ public class OrderDAO {
         return false;
     }
 
+    // Lấy đơn hàng theo user_id
+    public List<Order> getByUserId(int userId) {
+        List<Order> list = new ArrayList<>();
+
+        String sql =
+            "SELECT o.id, o.order_code, o.user_id, o.total_amount, o.status, " +
+            "       o.shipping_address, o.payment_method, o.payment_status, " +
+            "       o.note, o.created_at, u.full_name AS user_name " +
+            "FROM orders o " +
+            "LEFT JOIN users u ON o.user_id = u.id " +
+            "WHERE o.user_id = ? " +
+            "ORDER BY o.created_at DESC";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(mapRow(rs));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+
     private Order mapRow(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String orderCode = rs.getString("order_code");
