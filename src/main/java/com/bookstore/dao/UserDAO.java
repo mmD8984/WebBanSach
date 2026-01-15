@@ -132,4 +132,78 @@ public class UserDAO {
         }
         return false;
     }
+
+    // Tìm user theo email
+    public User findByEmail(String email) {
+        String sql = "SELECT id, email, password_hash, full_name, phone, role, is_active " +
+                     "FROM users WHERE email = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new User(
+                            rs.getInt("id"),
+                            rs.getString("email"),
+                            rs.getString("password_hash"),
+                            rs.getString("full_name"),
+                            rs.getString("phone"),
+                            rs.getString("role"),
+                            rs.getBoolean("is_active")
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Xác thực user với email và password (hash SHA-256)
+    public User authenticate(String email, String password) {
+        User user = findByEmail(email);
+        if (user == null) return null;
+        if (!user.isActive()) return null;
+
+        // Hash password input với SHA-256
+        String hashedInput = hashPassword(password);
+        if (hashedInput != null && hashedInput.equals(user.getPasswordHash())) {
+            return user;
+        }
+        return null;
+    }
+
+    // Kiểm tra email đã tồn tại chưa
+    public boolean emailExists(String email) {
+        String sql = "SELECT 1 FROM users WHERE email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // Hash password với SHA-256
+    private String hashPassword(String password) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
